@@ -29,6 +29,25 @@ export async function createTransaction(req, res) {
     }
   }
 
-
-    
+  export async function getTransactions(req, res) {
+    const { user } = res.locals;
+  
+    try {
+      let totalSum = 0;
+      user.transactions.forEach(transaction => {
+        if (transaction.type === 'entrada') {
+          totalSum += transaction.amount;
+        } else {
+          totalSum -= transaction.amount;
+        }
+      })
+  
+      const formattedUser = { ...user, totalSum };
+      delete formattedUser.password;
+  
+      res.send(formattedUser);
+    } catch (error) {
+      res.status(500).send(error.message);
+    }
+  }  
   

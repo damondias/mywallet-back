@@ -8,7 +8,7 @@ const transactionsRouter = Router();
 
 transactionsRouter.use(validateAuth);
 
-transactionsRouter.post('/user/transactions', validateSchema(transactionSchema), createTransaction);
-transactionsRouter.get('/user', getTransactions);
+transactionsRouter.post('/nova-transacao/:tipo', validateSchema(transactionSchema), createTransaction);
+transactionsRouter.get('/home', getTransactions);
 
 export default transactionsRouter;
